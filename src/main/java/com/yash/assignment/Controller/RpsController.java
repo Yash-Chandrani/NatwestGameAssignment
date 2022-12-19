@@ -1,5 +1,7 @@
 package com.yash.assignment.Controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +18,18 @@ import com.yash.assignment.Service.InvalidOptionException;
 @RestController
 @RequestMapping("/rps")
 public class RpsController {
+	
+	final Logger logger=LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private GamePlay rpsService;
 	
 	@GetMapping("/play")
 	public ResponseEntity<Object> getResponse(@RequestParam(value="playerOption") String playerMove) throws InvalidOptionException{
+		logger.debug("Player input string: "+playerMove);
 		Options computerPlay=rpsService.getRandom();
 		String finalResult=rpsService.results(playerMove, computerPlay);
+		logger.debug("Final result: "+finalResult);
 		return new ResponseEntity<>(finalResult,HttpStatus.OK);
 	}
 }
