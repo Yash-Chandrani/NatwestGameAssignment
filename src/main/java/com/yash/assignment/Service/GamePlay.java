@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GamePlay extends RpsService {
 	
+	final Logger logger=LoggerFactory.getLogger(this.getClass());
 	public enum Options
 	{
 		rock,
@@ -19,72 +22,59 @@ public class GamePlay extends RpsService {
 	public String results(String player, Options computerPlay) throws InvalidOptionException 
 	{
 		String result=null;
-		int playerCount=0;
-		int computerCount=0;
-		String finalResult=null;
 		
 		try {
 
 				Options playerPlay = Options.valueOf(player.toLowerCase());
+				logger.debug("playerPlay = " + playerPlay.toString());
+
+	            logger.debug("computerPlay = " + computerPlay.toString());
 
 				if (computerPlay.equals(Options.paper)) {
 					if (playerPlay.equals(Options.rock)) {
 						result = "Computer scores";
-						computerCount = computerCount + 1;
 					} else if (playerPlay.equals(Options.paper)) {
 						result = "tie";
 					} else {
 						result = "Player scores";
-						playerCount = playerCount + 1;
 					}
 				}
 
 				else if (computerPlay.equals(Options.scissor)) {
 					if (playerPlay.equals(Options.paper)) {
 						result = "Computer scores";
-						computerCount = computerCount + 1;
 					} else if (playerPlay.equals(Options.scissor)) {
 						result = "tie";
 					} else {
 						result = "Player scores";
-						playerCount = playerCount + 1;
 					}
 				}
 
 				else if (computerPlay.equals(Options.rock)) {
 					if (playerPlay.equals(Options.scissor)) {
 						result = "Computer scores";
-						computerCount = computerCount + 1;
 					} else if (playerPlay.equals(Options.rock)) {
 						result = "tie";
 					} else {
 						result = "Player scores";
-						playerCount = playerCount + 1;
 					}
-				}
-
-
-				if (playerCount > computerCount) {
-					finalResult = "Player wins";
-				} else if (playerCount == computerCount) {
-					finalResult = "It's a tie";
-				} else {
-					finalResult = "Computer wins";
-				}
-
+				}				
 
 		} catch (IllegalArgumentException illegalArgumentException) {
 			// TODO: handle exception
+            logger.error(illegalArgumentException.getMessage());
 			throw new InvalidOptionException("Invalid move! You can select Rock, Paper, Scissor or Exit");
 		}
 		catch (Exception e) {
 			// TODO: handle exception
+            logger.error(e.getMessage());
 			e.printStackTrace();
 		}
-		return finalResult;
+		return result;
 	}
 	
 	public Options getRandom() {
+        logger.info("getRandom() method called");
 		try {
 			List<Options> optionsList = new ArrayList<Options>();
 
