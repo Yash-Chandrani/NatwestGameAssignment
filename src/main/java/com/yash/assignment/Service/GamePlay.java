@@ -10,72 +10,74 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GamePlay extends RpsService {
-	
-	final Logger logger=LoggerFactory.getLogger(this.getClass());
 
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	// rock paper scissors game logic
 	@Override
-	public String results(String player, String computerPlay) throws InvalidOptionException 
-	{
-		String result=null;
-		if(player==" " || player=="null") {
+	public String results(String player, String computerPlay) throws InvalidOptionException {
+		// checking for null input
+		String result = null;
+		if (player == " " || player == "null") {
 			throw new IllegalArgumentException("Input cannot be null or empty");
 		}
-		
+
 		try {
 
-				String playerPlay=player.toLowerCase();
-				logger.debug("playerPlay = " + playerPlay.toString());
+			String playerPlay = player.toLowerCase();
+			logger.debug("playerPlay = " + playerPlay.toString());
 
-	            logger.debug("computerPlay = " + computerPlay.toString());
+			logger.debug("computerPlay = " + computerPlay.toString());
 
-				if (computerPlay.equals("paper")) {
-					if (playerPlay.equals("rock")) {
-						result = "Computer scores";
-					} else if (playerPlay.equals("paper")) {
-						result = "tie";
-					} else {
-						result = "Player scores";
-					}
+			if (computerPlay.equals("paper")) {
+				if (playerPlay.equals("rock")) {
+					result = "Computer scores";
+				} else if (playerPlay.equals("paper")) {
+					result = "tie";
+				} else {
+					result = "Player scores";
 				}
+			}
 
-				else if (computerPlay.equals("scissor")) {
-					if (playerPlay.equals("paper")) {
-						result = "Computer scores";
-					} else if (playerPlay.equals("scissor")) {
-						result = "tie";
-					} else {
-						result = "Player scores";
-					}
+			else if (computerPlay.equals("scissor")) {
+				if (playerPlay.equals("paper")) {
+					result = "Computer scores";
+				} else if (playerPlay.equals("scissor")) {
+					result = "tie";
+				} else {
+					result = "Player scores";
 				}
+			}
 
-				else if (computerPlay.equals("rock")) {
-					if (playerPlay.equals("scissor")) {
-						result = "Computer scores";
-					} else if (playerPlay.equals("rock")) {
-						result = "tie";
-					} else {
-						result = "Player scores";
-					}
-				}				
+			else if (computerPlay.equals("rock")) {
+				if (playerPlay.equals("scissor")) {
+					result = "Computer scores";
+				} else if (playerPlay.equals("rock")) {
+					result = "tie";
+				} else {
+					result = "Player scores";
+				}
+			}
 
 		} catch (IllegalArgumentException illegalArgumentException) {
 			// TODO: handle exception
-            logger.error(illegalArgumentException.getMessage());
+			logger.error(illegalArgumentException.getMessage());
 			throw new InvalidOptionException("Invalid move! You can select Rock, Paper, Scissor or Exit");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
-            logger.error(e.getMessage());
+			logger.error(e.getMessage());
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
-	public String getRandom() {
-        logger.info("getRandom() method called");
-		try {
-			List<String> optionsList = new ArrayList<String>();
 
+	// get random move for Computer
+	public String getRandom() {
+		logger.info("getRandom() method called");
+		try {
+			//storing all options in an ArrayList
+			List<String> optionsList = new ArrayList<String>();
+			
 			optionsList.add("rock");
 			optionsList.add("paper");
 			optionsList.add("scissor");
@@ -88,9 +90,5 @@ public class GamePlay extends RpsService {
 			throw e;
 		}
 	}
-
-	
-		
-	
 
 }

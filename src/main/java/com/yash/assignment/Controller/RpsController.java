@@ -25,7 +25,9 @@ public class RpsController {
 	@GetMapping("/play")
 	public ResponseEntity<Object> getResponse(@RequestParam(value="playerOption") String playerMove) throws InvalidOptionException{
 		logger.debug("Player input string: "+playerMove);
+		//store randomly generated computer move
 		String computerPlay=rpsService.getRandom();
+		//store final result of winning
 		String finalResult=rpsService.results(playerMove, computerPlay);
 		logger.debug("Final result: "+finalResult);
 		return new ResponseEntity<>(finalResult,HttpStatus.OK);

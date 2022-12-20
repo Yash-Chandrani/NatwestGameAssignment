@@ -23,34 +23,40 @@ class NatwestGameAssignmentTests {
 	@Autowired
 	private GamePlay game;
     
-    @BeforeEach
+    // initial test
+	@BeforeEach
     void initialTest() {
     	logger.debug("Test started");
     }
     
+	// last or ending test
     @AfterEach
     void endTest() {
     	logger.debug("Testing done");
     }
 	
+    //Player: rock; Computer: scissor
     @Test
     void testRockBeatsScissors() throws InvalidOptionException {
-        String result = game.results("rock", "scissors");
+        String result = game.results("rock", "scissor");
         assertEquals("Player wins", result);
     }
 
+  //Player: paper; Computer: rock
     @Test
     void testPaperBeatsRock() throws InvalidOptionException {
         String result = game.results("paper", "rock");
         assertEquals("Player wins", result);
     }
 
+  //Player: scissor; Computer: paper
     @Test
     void testScissorsBeatsPaper() throws InvalidOptionException {
-        String result = game.results("scissors", "paper");
+        String result = game.results("scissor", "paper");
         assertEquals("Player wins", result);
     }
 
+  //Player: rock; Computer: rock
     @Test
     void testTieRock() throws InvalidOptionException {
         String result = game.results("rock", "rock");
@@ -58,16 +64,20 @@ class NatwestGameAssignmentTests {
     }
     
     @Test
+  //Player: paper; Computer: paper
     void testTiePaper() throws InvalidOptionException {
         String result = game.results("paper", "paper");
         assertEquals("tie", result);
     }
+    
     @Test
+  //Player: rock; Computer: scissor
     void testTieScissor() throws InvalidOptionException {
         String result = game.results("scissor", "scissor");
         assertEquals("tie", result);
     }
     
+    // Checking invalid input
     @Test
     void testInvalidInput() throws InvalidOptionException {
     	Throwable exception = assertThrows(
@@ -79,6 +89,8 @@ class NatwestGameAssignmentTests {
     		    );
     		    assertEquals("Input cannot be null or empty", exception.getMessage());
     }
+
+    //checking getRandom() function
     @Test
 	void testGetRandom(){
 		assertThat(game.getRandom()).isIn("rock", "paper", "scissor");
