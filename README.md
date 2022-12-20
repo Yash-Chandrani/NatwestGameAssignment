@@ -33,7 +33,7 @@ Run the file NatwestGameAssignmentTests.java inside src/test/java/com/yash/assig
   cd src/test/java/com/yash/assignment/NatwestGameAssignmentTests.java
 ```
 
-#### Get all items
+#### Get result
 
 ```http
   GET localhost:8080/rps/play?playerOption={playerOption}
@@ -43,10 +43,11 @@ Run the file NatwestGameAssignmentTests.java inside src/test/java/com/yash/assig
 | :--------      | :-------  |    
 | `playerOption` | `string`  |
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img width="638" alt="image" src="https://user-images.githubusercontent.com/60565112/208675488-4739b8ec-6061-4fa9-9f69-0fd584fcafd9.png">
+
 ## Swagger API Documentation
 
-http://localhost:8080/swagger-ui.html
+URL: http://localhost:8080/swagger-ui.html
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/60565112/208675795-550b8467-2620-431d-9c7c-3c4350df42ea.png">
 
