@@ -17,6 +17,9 @@ public class GamePlay extends RpsService {
 	public String results(String player, String computerPlay) throws InvalidOptionException 
 	{
 		String result=null;
+		if(player==" " || player=="null") {
+			throw new IllegalArgumentException("Input cannot be null or empty");
+		}
 		
 		try {
 
