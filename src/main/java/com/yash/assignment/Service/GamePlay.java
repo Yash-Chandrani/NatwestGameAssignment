@@ -34,8 +34,11 @@ public class GamePlay extends RpsService {
 					result = "Computer scores";
 				} else if (playerPlay.equals("paper")) {
 					result = "tie";
-				} else {
+				} else if (playerPlay.equals("scissor")) {
 					result = "Player scores";
+				} else {
+					System.out.println("invalid -----------------");
+					throw new InvalidOptionException("Invalid move!! Please select rock, paper or scissor");
 				}
 			}
 
@@ -44,8 +47,11 @@ public class GamePlay extends RpsService {
 					result = "Computer scores";
 				} else if (playerPlay.equals("scissor")) {
 					result = "tie";
-				} else {
+				} else if (playerPlay.equals("rock")) {
 					result = "Player scores";
+				} else {
+					System.out.println("invalid -----------------");
+					throw new InvalidOptionException("Invalid move!! Please select rock, paper or scissor");
 				}
 			}
 
@@ -54,15 +60,19 @@ public class GamePlay extends RpsService {
 					result = "Computer scores";
 				} else if (playerPlay.equals("rock")) {
 					result = "tie";
-				} else {
+				} else if (playerPlay.equals("paper")) {
 					result = "Player scores";
+				} else {
+					System.out.println("invalid -----------------");
+					throw new InvalidOptionException("Invalid move!! Please select rock, paper or scissor");
 				}
 			}
 
-		} catch (IllegalArgumentException illegalArgumentException) {
+		} catch (InvalidOptionException invalidOptionException) {
 			// TODO: handle exception
-			logger.error(illegalArgumentException.getMessage());
-			throw new InvalidOptionException("Invalid move! You can select Rock, Paper, Scissor or Exit");
+			System.out.println("Invalid option");
+			logger.error(invalidOptionException.getMessage());
+			result = invalidOptionException.getMessage();
 		} catch (Exception e) {
 			// TODO: handle exception
 			logger.error(e.getMessage());
@@ -75,9 +85,9 @@ public class GamePlay extends RpsService {
 	public String getRandom() {
 		logger.info("getRandom() method called");
 		try {
-			//storing all options in an ArrayList
+			// storing all options in an ArrayList
 			List<String> optionsList = new ArrayList<String>();
-			
+
 			optionsList.add("rock");
 			optionsList.add("paper");
 			optionsList.add("scissor");
