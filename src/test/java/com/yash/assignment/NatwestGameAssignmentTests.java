@@ -39,21 +39,21 @@ class NatwestGameAssignmentTests {
     @Test
     void testRockBeatsScissors() throws InvalidOptionException {
         String result = game.results("rock", "scissor");
-        assertEquals("Player wins", result);
+        assertEquals("Player scores", result);
     }
 
   //Player: paper; Computer: rock
     @Test
     void testPaperBeatsRock() throws InvalidOptionException {
         String result = game.results("paper", "rock");
-        assertEquals("Player wins", result);
+        assertEquals("Player scores", result);
     }
 
   //Player: scissor; Computer: paper
     @Test
     void testScissorsBeatsPaper() throws InvalidOptionException {
         String result = game.results("scissor", "paper");
-        assertEquals("Player wins", result);
+        assertEquals("Player scores", result);
     }
 
   //Player: rock; Computer: rock
@@ -83,7 +83,7 @@ class NatwestGameAssignmentTests {
     	Throwable exception = assertThrows(
     		      IllegalArgumentException.class, 
     		      () -> {
-    		    	  game.results(" ", "scissor");
+    		    	  game.results(" ", "rock");
     		    	  throw new IllegalArgumentException("Input cannot be null or empty");
     		      }
     		    );
@@ -99,5 +99,4 @@ class NatwestGameAssignmentTests {
 		assertThat(game.getRandom()).isIn("rock", "paper", "scissor");
 	}
 }
-
 
