@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.yash.assignment.Service.GamePlay;
-import com.yash.assignment.Service.GamePlay.Options;
 import com.yash.assignment.Service.InvalidOptionException;
 
 
@@ -27,7 +25,7 @@ public class RpsController {
 	@GetMapping("/play")
 	public ResponseEntity<Object> getResponse(@RequestParam(value="playerOption") String playerMove) throws InvalidOptionException{
 		logger.debug("Player input string: "+playerMove);
-		Options computerPlay=rpsService.getRandom();
+		String computerPlay=rpsService.getRandom();
 		String finalResult=rpsService.results(playerMove, computerPlay);
 		logger.debug("Final result: "+finalResult);
 		return new ResponseEntity<>(finalResult,HttpStatus.OK);

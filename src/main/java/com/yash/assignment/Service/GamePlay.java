@@ -12,48 +12,43 @@ import org.springframework.stereotype.Service;
 public class GamePlay extends RpsService {
 	
 	final Logger logger=LoggerFactory.getLogger(this.getClass());
-	public enum Options
-	{
-		rock,
-		paper,
-		scissor,
-	}
+
 	@Override
-	public String results(String player, Options computerPlay) throws InvalidOptionException 
+	public String results(String player, String computerPlay) throws InvalidOptionException 
 	{
 		String result=null;
 		
 		try {
 
-				Options playerPlay = Options.valueOf(player.toLowerCase());
+				String playerPlay=player.toLowerCase();
 				logger.debug("playerPlay = " + playerPlay.toString());
 
 	            logger.debug("computerPlay = " + computerPlay.toString());
 
-				if (computerPlay.equals(Options.paper)) {
-					if (playerPlay.equals(Options.rock)) {
+				if (computerPlay.equals("paper")) {
+					if (playerPlay.equals("rock")) {
 						result = "Computer scores";
-					} else if (playerPlay.equals(Options.paper)) {
+					} else if (playerPlay.equals("paper")) {
 						result = "tie";
 					} else {
 						result = "Player scores";
 					}
 				}
 
-				else if (computerPlay.equals(Options.scissor)) {
-					if (playerPlay.equals(Options.paper)) {
+				else if (computerPlay.equals("scissor")) {
+					if (playerPlay.equals("paper")) {
 						result = "Computer scores";
-					} else if (playerPlay.equals(Options.scissor)) {
+					} else if (playerPlay.equals("scissor")) {
 						result = "tie";
 					} else {
 						result = "Player scores";
 					}
 				}
 
-				else if (computerPlay.equals(Options.rock)) {
-					if (playerPlay.equals(Options.scissor)) {
+				else if (computerPlay.equals("rock")) {
+					if (playerPlay.equals("scissor")) {
 						result = "Computer scores";
-					} else if (playerPlay.equals(Options.rock)) {
+					} else if (playerPlay.equals("rock")) {
 						result = "tie";
 					} else {
 						result = "Player scores";
@@ -73,14 +68,14 @@ public class GamePlay extends RpsService {
 		return result;
 	}
 	
-	public Options getRandom() {
+	public String getRandom() {
         logger.info("getRandom() method called");
 		try {
-			List<Options> optionsList = new ArrayList<Options>();
+			List<String> optionsList = new ArrayList<String>();
 
-			optionsList.add(Options.rock);
-			optionsList.add(Options.paper);
-			optionsList.add(Options.scissor);
+			optionsList.add("rock");
+			optionsList.add("paper");
+			optionsList.add("scissor");
 
 			int randomise = new Random().nextInt(optionsList.size());
 
